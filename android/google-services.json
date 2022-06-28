@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "1053989810266",
+    "project_id": "ahar-customer-app",
+    "storage_bucket": "ahar-customer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053989810266:android:af7c6a094b7a53f59b2863",
+        "android_client_info": {
+          "package_name": "com.ahar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053989810266-fqi88lilt2jmudj9ob4slkkolvm9s6k1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahar.app",
+            "certificate_hash": "38dc07dd84ba23605d491bcf60b03b4fc29317bc"
+          }
+        },
+        {
+          "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7hbcBVGISHxyC33FGze1p2LYW-rTVvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053989810266:android:5428d2a08b167d629b2863",
+        "android_client_info": {
+          "package_name": "com.ahar.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053989810266-5sha4dfs5p1ipgbr9t4ofkqksjevcg4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahar.delivery",
+            "certificate_hash": "38dc07dd84ba23605d491bcf60b03b4fc29317bc"
+          }
+        },
+        {
+          "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7hbcBVGISHxyC33FGze1p2LYW-rTVvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053989810266:android:71e1ce36554469f69b2863",
+        "android_client_info": {
+          "package_name": "com.ahar.owner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053989810266-2sq45uh1e4n51cr1894biu5dqi59a5dk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahar.owner",
+            "certificate_hash": "38dc07dd84ba23605d491bcf60b03b4fc29317bc"
+          }
+        },
+        {
+          "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7hbcBVGISHxyC33FGze1p2LYW-rTVvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053989810266-79s74saj6kau4uhjddl0j9jqagfir0nd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
