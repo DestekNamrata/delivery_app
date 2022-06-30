@@ -18,4 +18,5 @@ class APIList {
   static String? notificationOrderUpdate =
       "notification-order-product-receive/";
   static String? notificationOrderStatus = "notification-order-status/";
+  static String? getImageNotificationOrder = "orders/";
 }

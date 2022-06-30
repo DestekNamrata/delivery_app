@@ -5,6 +5,13 @@ import 'package:food_ex_delivery_app/services/api-list.dart';
 import 'package:food_ex_delivery_app/services/server.dart';
 import 'package:get/get.dart';
 
+//for multipart
+import 'package:http_parser/http_parser.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:mime/mime.dart';
+import 'package:http/http.dart';
+
 class OrderListController extends GetxController {
   Server server = Server();
   List<Order> orderList = <Order>[];
@@ -111,4 +118,7 @@ class OrderListController extends GetxController {
       }
     });
   }
+
+
+
 }
