@@ -80,6 +80,7 @@ class _OrderDetailsByIdState extends State<OrderDetailsById> {
                 total: orderDetails.orderDetailsByIdData!.total,
                 orderID: orderDetails.orderDetailsByIdData!.id,
                 statusCode: orderDetails.statusCode,
+                  phone:orderDetails.orderDetailsByIdData!.customer!.phone
               ),
               body: RefreshIndicator(
                 onRefresh: _onRefresh,

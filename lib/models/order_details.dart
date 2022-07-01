@@ -77,6 +77,7 @@ class OrderDetailsByIdData {
     this.date,
     this.items,
     this.customer,
+    this.deliveryBoy,
     this.restaurant,
   });
 
@@ -110,10 +111,14 @@ class OrderDetailsByIdData {
   List<Item>? items;
   Customer? customer;
   Restaurant? restaurant;
+  DeliveryBoy? deliveryBoy;
 
   factory OrderDetailsByIdData.fromJson(Map<String, dynamic> json) =>
       OrderDetailsByIdData(
         id: json["id"],
+        deliveryBoy: json['deliveryBoy'] != null
+            ? new DeliveryBoy.fromJson(json['deliveryBoy'])
+            : null,
         userId: json["user_id"],
         total: json["total"],
         subTotal: json["sub_total"],
@@ -176,7 +181,81 @@ class OrderDetailsByIdData {
         "items": List<dynamic>.from(items!.map((x) => x.toJson())),
         "customer": customer!.toJson(),
         "restaurant": restaurant!.toJson(),
+
+  "deliveryBoy": this.deliveryBoy!.toJson(),
+
       };
+}
+class DeliveryBoy {
+  int? id;
+  String? name;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? phone;
+  // List<Roles>? roles;
+  String? address;
+  String? username;
+  String? balance;
+  int? status;
+  int? applied;
+  String? image;
+
+  DeliveryBoy(
+      {this.id,
+        this.name,
+        this.firstName,
+        this.lastName,
+        this.email,
+        this.phone,
+        // this.roles,
+        this.address,
+        this.username,
+        this.balance,
+        this.status,
+        this.applied,
+        this.image});
+
+  DeliveryBoy.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    email = json['email'];
+    phone = json['phone'];
+    // if (json['roles'] != null) {
+    //   roles = <Roles>[];
+    //   json['roles'].forEach((v) {
+    //     roles!.add(new Roles.fromJson(v));
+    //   });
+    // }
+    address = json['address'];
+    username = json['username'];
+    balance = json['balance'];
+    status = json['status'];
+    applied = json['applied'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['first_name'] = this.firstName;
+    data['last_name'] = this.lastName;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    // if (this.roles != null) {
+    //   data['roles'] = this.roles!.map((v) => v.toJson()).toList();
+    // }
+    data['address'] = this.address;
+    data['username'] = this.username;
+    data['balance'] = this.balance;
+    data['status'] = this.status;
+    data['applied'] = this.applied;
+    data['image'] = this.image;
+    return data;
+  }
 }
 
 class Customer {

@@ -68,6 +68,9 @@ dependencies:
   image_cropper: 1.4.1
   #for multipart
   mime: ^1.0.0
+  firebase_auth: ^3.0.1
+  pin_code_fields: ^7.3.0
+  pinput: 0.2.6
 
 
 

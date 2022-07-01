@@ -3,6 +3,7 @@ import 'package:food_ex_delivery_app/controllers/global-controller.dart';
 import 'package:food_ex_delivery_app/controllers/order_details_controller.dart';
 import 'package:food_ex_delivery_app/utils/theme_colors.dart';
 import 'package:get/get.dart';
+import '../controllers/auth-controller.dart';
 
 class Order_details_bottom_bar extends StatefulWidget {
   final String? subTotal;
@@ -10,13 +11,15 @@ class Order_details_bottom_bar extends StatefulWidget {
   final String? total;
   final int? orderID;
   final int? statusCode;
+  final String? phone;
   Order_details_bottom_bar(
       {Key? key,
       required this.statusCode,
       required this.orderID,
       this.subTotal,
       this.deliveryFee,
-      this.total})
+      this.total,
+      this.phone})
       : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class _Order_details_bottom_barState extends State<Order_details_bottom_bar> {
   String delivered_text = "Delivered";
   var mainHeight, mainWidth;
   var cart_value = 2;
+  AuthController authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +207,13 @@ class _Order_details_bottom_barState extends State<Order_details_bottom_bar> {
     Widget continueButton = TextButton(
       child: Text("Yes"),
       onPressed: () {
-        orderDetailsController.orderStatus('20', widget.orderID);
-        Navigator.of(context).pop();
+        // orderDetailsController.orderStatus('20', widget.orderID);
+        // Navigator.of(context).pop();
+        authController.VerifyWithPhone(
+            context: context,
+            id: widget.orderID,
+            phone:widget.phone
+        );
       },
     );
 

@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_ex_delivery_app/models/refresh_token.dart';
 import 'package:food_ex_delivery_app/models/reg_api.dart';
 import 'package:food_ex_delivery_app/models/login_api.dart';
@@ -9,6 +13,8 @@ import 'package:food_ex_delivery_app/services/user-service.dart';
 import 'package:food_ex_delivery_app/services/validators.dart';
 import 'package:food_ex_delivery_app/views/main_screen.dart';
 import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import '../views/verify_phone.dart';
 import 'global-controller.dart';
 
 class AuthController extends GetxController {
@@ -24,6 +30,13 @@ class AuthController extends GetxController {
       TextEditingController();
   bool obscureText = true;
   bool loader = false;
+  var verificationId = "";
+  var code = "".obs;
+  StreamController<ErrorAnimationType>? errorController;
+
+  void onChangeSmsCode(String text) {
+    code.value = text;
+  }
 
   changeVisibility() {
     obscureText = !obscureText;
@@ -112,6 +125,46 @@ class AuthController extends GetxController {
       }
     });
   }
+  VerifyWithPhone({BuildContext? context,id,phone}) async {
+    loader = true;
+    print(phone);
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: "+919730259440",
+        // phoneNumber: "+91"+phone.toString(),
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {
+          loader = false;
+          if (e.code == 'invalid-phone-number') {
+            // Get.bottomSheet(ErrorAlert(
+            //   message: "Phone number is not valid".tr,
+            //   onClose: () {
+            //     Get.back();
+            //   },
+            // ));
+            Fluttertoast.showToast(msg: "Phone number is not valid".tr);
+          }
+        },
+        codeSent: (String vId, int? resendToken) {
+          loader = false;
+          verificationId = vId;
+          // Get.toNamed("/verifyPhone",
+          //     arguments: {
+          //       "phone": phone,
+          //       "flagVerify": "0"
+          //     });
+          Navigator.of(context!).pop();
+
+          Get.to(() => VerifyPhonePage(flagVerify: "0",orderID:id));
+          //from signIn
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    }catch(e){
+      print(e);
+    }
+
+  }
 
   signupOnTap(
       {BuildContext? context,
@@ -124,9 +177,9 @@ class AuthController extends GetxController {
     Future.delayed(Duration(milliseconds: 10), () {
       update();
     });
+    var fcmToken=await FirebaseMessaging.instance.getToken();
     var email_validator = _validators.validateEmail(value: email);
     var pass_validator = _validators.validatePassword(value: password);
-
     if (email_validator == null && pass_validator == null) {
       Map body = {
         'name': nameController.text,
@@ -135,7 +188,8 @@ class AuthController extends GetxController {
         'phone': phone_number,
         'password': password,
         'password_confirmation': confirm_password,
-        'role': 4
+        'role': 4,
+        'device_token':fcmToken
       };
       String jsonBody = json.encode(body);
 
