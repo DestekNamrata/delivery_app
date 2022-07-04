@@ -296,14 +296,14 @@ class _ImageUploadOrdersState extends State<ImageUploadOrders>{
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "FoodBank",
+            "Order Id: #"+widget.orderId,
             style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: FontSize.xLarge,
                 color: Colors.white),
           ),
           backgroundColor: Colors.green,
-          centerTitle: true,
+          centerTitle: false,
           elevation: 0.0,
         ),
         body:Stack(

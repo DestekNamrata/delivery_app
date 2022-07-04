@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -816,6 +817,75 @@ class _OrderDetailsByIdState extends State<OrderDetailsById> {
     return _orderStatusSteps;
   }
 
+  //for navigation address for source and dest latLng
+  // void launchMapsUrl(
+  //     sourceLatitude,
+  //     sourceLongitude,
+  //     destinationLatitude,
+  //     destinationLongitude) async {
+  //   String mapOptions = [
+  //     'saddr=$sourceLatitude,$sourceLongitude',
+  //     'daddr=$destinationLatitude,$destinationLongitude',
+  //     'dir_action=navigate'
+  //   ].join('&');
+  //
+  //   final url = 'https://www.google.com/maps?$mapOptions';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
+
+  //to launch map through latLng
+  Future<void> openMap(BuildContext context, double lat, double lng) async {
+    String url = '';
+    String urlAppleMaps = '';
+    if (Platform.isAndroid) {
+      url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+    } else {
+      urlAppleMaps = 'https://maps.apple.com/?q=$lat,$lng';
+      url = 'comgooglemaps://?saddr=&daddr=$lat,$lng&directionsmode=driving';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else if (await canLaunch(urlAppleMaps)) {
+      await launch(urlAppleMaps);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  //to launchmap through address
+  Future<void> launchMapUrl(String address) async {
+    String encodedAddress = Uri.encodeComponent(address);
+    String googleMapUrl = "https://www.google.com/maps/search/?api=1&query=$encodedAddress";
+    String appleMapUrl = "http://maps.apple.com/?q=$encodedAddress";
+    if (Platform.isAndroid) {
+      try {
+        if (await canLaunch(googleMapUrl)) {
+          await launch(googleMapUrl);
+        }
+      } catch (error) {
+        throw("Cannot launch Google map");
+      }
+    }
+    if (Platform.isIOS) {
+      try {
+        if (await canLaunch(appleMapUrl)) {
+          await launch(appleMapUrl);
+        }
+      } catch (error) {
+        throw("Cannot launch Apple map");
+      }
+    }
+  }
+
   Customer_details(OrderDetailsController orderDetails) {
     return Column(
       children: [
@@ -872,7 +942,12 @@ class _OrderDetailsByIdState extends State<OrderDetailsById> {
                         .toString(),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // launchMapsUrl(sourceLatitude, sourceLongitude, destinationLatitude, destinationLongitude)
+                      launchMapUrl(orderDetails.orderDetailsByIdData!.customer!.address.toString());
+                      // openMap(context,double.parse(orderDetails.orderDetailsByIdData!.lat.toString()),
+                      //     double.parse(orderDetails.orderDetailsByIdData!.long.toString()));
+                    },
                     icon: Icon(
                       Icons.location_on_outlined,
                       color: ThemeColors.baseThemeColor,
