@@ -945,6 +945,7 @@ class _OrderDetailsByIdState extends State<OrderDetailsById> {
                     onPressed: () {
                       // launchMapsUrl(sourceLatitude, sourceLongitude, destinationLatitude, destinationLongitude)
                       launchMapUrl(orderDetails.orderDetailsByIdData!.customer!.address.toString());
+
                       // openMap(context,double.parse(orderDetails.orderDetailsByIdData!.lat.toString()),
                       //     double.parse(orderDetails.orderDetailsByIdData!.long.toString()));
                     },
